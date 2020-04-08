@@ -37,24 +37,16 @@ public class UsersFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.users_recycler_view, container, false);
 
-        users = new ArrayList<>();
-
-        recyclerView = view.findViewById(R.id.usersRecycleView);
-        adapter = new UserAdapter(users, getContext());
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
+        setRecyclerView(view);
         getUsers();
+
         return view;
     }
 
     private void getUsers() {
-
-        final ProgressDialog progressDialog = new ProgressDialog(getContext());
-        progressDialog.setMessage("Loading...");
-        progressDialog.show();
 
         String url = "https://my-json-server.typicode.com/MoldovanG/JsonServer/users?fbclid=IwAR11exFAbH8YDRDSwnNnUlp5GHBMfsAhdlvQ_zMT69vtOQcpfZMuTpZO9gc";
 
@@ -71,17 +63,27 @@ public class UsersFragment extends Fragment {
                     }
                 }
                 adapter.notifyDataSetChanged();
-                progressDialog.dismiss();
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(getContext(), "VolleyError: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-                progressDialog.dismiss();
             }
         });
 
         MySingleton.getInstance(getContext()).addToRequestQueue(jsonArrayRequest);
+
+    }
+
+    private void setRecyclerView(View view) {
+
+        users = new ArrayList<>();
+
+        recyclerView = view.findViewById(R.id.usersRecycleView);
+        adapter = new UserAdapter(users, getContext());
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
     }
 
 }

@@ -32,17 +32,8 @@ public class ToDoAdapter extends  RecyclerView.Adapter<ToDoAdapter.ViewHolder>  
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
-        holder.title.setText(toDos.get(position).getTitle());
-        holder.id.setText(Integer.toString(toDos.get(position).getId()));
-        Boolean completed = toDos.get(position).getCompleted();
-        if (completed) {
-            holder.completed.setTextColor(Color.GREEN);
-            holder.completed.setText("Completed");
-        }
-        else {
-            holder.completed.setTextColor(Color.BLUE);
-            holder.completed.setText("Not completed");
-        }
+
+        setText(holder, position);
         /*
         holder.container.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,6 +44,22 @@ public class ToDoAdapter extends  RecyclerView.Adapter<ToDoAdapter.ViewHolder>  
             }
         });
          */
+    }
+
+    private void setText(ViewHolder holder, int position) {
+
+        holder.title.setText(toDos.get(position).getTitle());
+        Boolean completed = toDos.get(position).getCompleted();
+
+        if (completed) {
+            holder.completed.setTextColor(Color.BLUE);
+            holder.completed.setText("Done");
+        }
+        else {
+            holder.completed.setTextColor(Color.RED);
+            holder.completed.setText("Do It!");
+        }
+
     }
 
     @Override
@@ -67,6 +74,7 @@ public class ToDoAdapter extends  RecyclerView.Adapter<ToDoAdapter.ViewHolder>  
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
+
         TextView title;
         TextView completed;
         TextView id;
@@ -76,7 +84,6 @@ public class ToDoAdapter extends  RecyclerView.Adapter<ToDoAdapter.ViewHolder>  
             super(itemView);
             title = itemView.findViewById(R.id.item_title);
             completed = itemView.findViewById(R.id.completed);
-            id = itemView.findViewById(R.id.to_do_id);
             container = itemView.findViewById(R.id.to_do);
         }
     }

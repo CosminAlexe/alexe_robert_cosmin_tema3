@@ -22,14 +22,20 @@ public class ToDoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_to_do);
 
         toDosFragment = new ToDosFragment();
-        if(getIntent().getExtras() != null) {
-            Bundle bundle = getIntent().getExtras();
-            toDosFragment.setArguments(bundle);
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.add(R.id.to_do_list, toDosFragment);
-            fragmentTransaction.commit();
-        }
+        if(getIntent().getExtras() != null)
+            moveToToDosFragment();
+
+    }
+
+    protected void moveToToDosFragment () {
+
+        Bundle bundle = getIntent().getExtras();
+        toDosFragment.setArguments(bundle);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.add(R.id.to_do_list, toDosFragment);
+        fragmentTransaction.commit();
+
     }
 
 }

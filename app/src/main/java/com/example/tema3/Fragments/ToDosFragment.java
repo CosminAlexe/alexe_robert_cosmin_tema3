@@ -58,9 +58,6 @@ public class ToDosFragment extends Fragment {
     }
 
     private void getToDos() {
-        final ProgressDialog progressDialog = new ProgressDialog(getContext());
-        progressDialog.setMessage("Loading...");
-        progressDialog.show();
         String url = "https://jsonplaceholder.typicode.com/todos?userId=" + String.valueOf(userId);
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(url, new Response.Listener<JSONArray>() {
@@ -75,13 +72,11 @@ public class ToDosFragment extends Fragment {
                     }
                 }
                 adapter.notifyDataSetChanged();
-                progressDialog.dismiss();
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(getContext(), "VolleyError: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-                progressDialog.dismiss();
             }
         });
         MySingleton.getInstance(getContext()).addToRequestQueue(jsonArrayRequest);

@@ -22,6 +22,7 @@ public class MySingleton {
         imageLoader = new ImageLoader(requestQueue, new ImageLoader.ImageCache() {
             private final LruCache<String, Bitmap>
                     cache = new LruCache<String, Bitmap>(20);
+
             @Override
             public Bitmap getBitmap(String url) {
                 return cache.get(url);

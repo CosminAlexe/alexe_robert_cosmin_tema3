@@ -2,6 +2,7 @@ package com.example.tema3.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,8 +40,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         holder.username.setText(users.get(position).getUsername());
-        holder.userId.setText(Integer.toString(users.get(position).getId()));
-        holder.email.setText("Email: " + users.get(position).getEmail());
+        holder.email.setText(users.get(position).getEmail());
         holder.container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,7 +67,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             username = itemView.findViewById(R.id.username);
-            userId = itemView.findViewById(R.id.user_id);
             container = itemView.findViewById(R.id.linearLayout);
             email = itemView.findViewById(R.id.email);
         }
